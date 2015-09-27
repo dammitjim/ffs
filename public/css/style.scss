@@ -1,0 +1,54 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.thebox {
+  width: 100%;
+  height: 400px;
+  font-family: 'Roboto', sans-serif;
+  .container {
+    // width: 75%;
+    // margin: 0 auto;
+    padding: 50px;
+    h1 {
+      font-size: 72px;
+      color: red;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 10px;
+      span {
+        color: rgb(196, 196, 196);
+        font-size: 64px;
+      }
+    }
+    form {
+      input {
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        box-shadow: inset 0 0 7px 4px rgba(255,255,255,.5);
+      }
+      button {
+        padding: 10px;
+        background-color: rgb(113, 26, 26);
+        border-image: none;
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+  .error {
+  }
+  .shameless-self-promotion {
+    color: rgb(203, 203, 203);
+    a {
+      color: rgb(203, 203, 203);
+      text-decoration: none;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}

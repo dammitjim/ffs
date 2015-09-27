@@ -15,11 +15,13 @@ router.post '/', (req, res, next) ->
   url = req.body.url
   request url, (error, response, html) ->
     if !error
-      console.log response
       $ = cheerio.load(html)
-      $('.storytext').filter ->
-        story = htmltotext.fromString($(this).html());
-        res.set {"Content-Disposition":"attachment; filename=\"story.txt\""}
-        res.send story
+      if $('.storytext').length > 0
+        $('.storytext').filter ->
+          story = htmltotext.fromString($(this).html());
+          res.set {"Content-Disposition":"attachment; filename=\"story.txt\""}
+          res.send story
+      else
+        res.render 'index', { error: "Invalid page submitted" }
     else
-      console.log "something went wrong"
+      res.render 'index', { error: "No page submitted" }
