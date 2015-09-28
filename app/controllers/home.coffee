@@ -16,10 +16,19 @@ router.post '/', (req, res, next) ->
   request url, (error, response, html) ->
     if !error
       $ = cheerio.load(html)
+      author = ''
+      title = ''
+      if $('#profile_top').length > 0
+        $('#profile_top').filter ->
+          links = $(this).find('a')
+          profile = links[0]
+          author = profile.children[0].data
+          title = $(this).find('b')[0].children[0].data
       if $('.storytext').length > 0
         $('.storytext').filter ->
           story = htmltotext.fromString($(this).html());
-          res.set {"Content-Disposition":"attachment; filename=\"story.txt\""}
+          title = title + " - " + author
+          res.set {"Content-Disposition":"attachment; filename=\"" + title + "\""}
           res.send story
       else
         res.render 'index', { error: "Invalid page submitted" }
