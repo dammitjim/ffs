@@ -18,14 +18,26 @@ router.post '/', (req, res, next) ->
       $ = cheerio.load(html)
       author = ''
       title = ''
-      if $('#profile_top').length > 0
-        $('#profile_top').filter ->
-          links = $(this).find('a')
-          profile = links[0]
-          author = profile.children[0].data
-          title = $(this).find('b')[0].children[0].data
       if $('.storytext').length > 0
+        if $('#profile_top').length > 0
+          $('#profile_top').filter ->
+            links = $(this).find('a')
+            profile = links[0]
+            author = profile.children[0].data
+            title = $(this).find('b')[0].children[0].data
         $('.storytext').filter ->
+          story = htmltotext.fromString($(this).html());
+          title = title + " - " + author
+          res.set {"Content-Disposition":"attachment; filename=\"" + title + "\""}
+          res.send story
+      else if $('.storycontent').length > 0
+        if $('#content').length > 0
+          $('#content div:first-child').filter ->
+            links = $(this).find('a')
+            profile = links[0]
+            author = profile.children[0].data
+            title = $(this).find('b')[0].children[0].data
+        $('.storycontent').filter ->
           story = htmltotext.fromString($(this).html());
           title = title + " - " + author
           res.set {"Content-Disposition":"attachment; filename=\"" + title + "\""}
