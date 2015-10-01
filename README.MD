@@ -13,3 +13,5 @@ Built using the following tools:
 * cheerio
 * request
 * html-to-text
+
+It now supports the mobile site, go team.
